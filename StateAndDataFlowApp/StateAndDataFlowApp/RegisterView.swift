@@ -10,6 +10,7 @@ import SwiftUI
 struct RegisterView: View {
 
     @EnvironmentObject var userManager: UserManager
+    @Binding var isCompleteRegistr: Bool
     
     var body: some View {
         VStack {
@@ -17,7 +18,7 @@ struct RegisterView: View {
                 name: $userManager.user.name,
                 nameIsValid: userManager.nameIsValid
             )
-            Button(action: registerUser){
+            Button(action: registerUser) {
                 HStack {
                     Image(systemName: "checkmark.circle")
                     Text("OK")
@@ -35,6 +36,7 @@ extension RegisterView {
         if !userManager.user.name.isEmpty {
             userManager.user.isRegistered.toggle()
             DataManager.shared.saveUser(user: userManager.user)
+            isCompleteRegistr.toggle()
         }
     }
 }
@@ -61,7 +63,3 @@ struct UserNameTF: View {
     }
 }
 
-
-#Preview {
-    RegisterView()
-}

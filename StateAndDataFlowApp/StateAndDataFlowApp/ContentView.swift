@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var timer = TimeCounter()
     @EnvironmentObject var userManager: UserManager
+    @Binding var isCompleteRegistr: Bool
     
     var body: some View {
         VStack {
@@ -33,16 +34,13 @@ struct ContentView: View {
                 
                 ButtonView(title: "LogOut", color: .blue) {
                     DataManager.shared.clear(userManager: userManager)
+                    isCompleteRegistr.toggle()
                 }
             }
         }
     }
 }
 
-#Preview {
-    ContentView()
-        .environmentObject(UserManager())
-}
 
 
 

@@ -9,13 +9,14 @@ import SwiftUI
 
 struct StarterView: View {
     @EnvironmentObject var userManager: UserManager
+    @State var isCopleteRegistr = false
     
     var body: some View {
         Group {
-            if userManager.nameIsValid {
-                ContentView()
+            if userManager.user.isRegistered {
+                ContentView(isCompleteRegistr: $isCopleteRegistr)
             } else {
-                RegisterView()
+                RegisterView(isCompleteRegistr: $isCopleteRegistr)
             }
         }
     }
